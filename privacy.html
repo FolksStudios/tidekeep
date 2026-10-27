@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutzerklärung / Privacy Policy – Tidekeep: Citadel of the Realm</title>
-  <meta name="description" content="Offizielle Datenschutzerklärung und Privacy Policy für Tidekeep: Citadel of the Realm. Zero-Tracking-Garantie, keine Weitergabe von Daten.">
+  <title>Privacy Policy – Tidekeep: Citadel of the Realm</title>
+  <meta name="description" content="Official Privacy Policy for Tidekeep: Citadel of the Realm by Folks Studios. Strict Zero-Tracking Policy, GDPR & COPPA compliant.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
       color: var(--text-main);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.65;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       min-height: 100vh;
     }
     .container {
@@ -51,7 +51,7 @@
     }
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: 2rem;
+      font-size: 2.1rem;
       color: var(--gold-light);
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
@@ -60,6 +60,7 @@
     .subtitle {
       color: var(--text-muted);
       font-size: 0.95rem;
+      letter-spacing: 0.5px;
     }
     .lang-switch {
       margin-top: 1.25rem;
@@ -71,7 +72,7 @@
       border: 1px solid var(--border-color);
     }
     .lang-btn {
-      padding: 6px 16px;
+      padding: 6px 18px;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -93,7 +94,7 @@
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 2.25rem;
+      padding: 2.5rem;
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       margin-bottom: 2rem;
     }
@@ -121,11 +122,8 @@
       font-family: 'Cinzel', serif;
       color: var(--gold-primary);
       font-size: 1.35rem;
-      margin-top: 2rem;
+      margin-top: 2.2rem;
       margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
     h2:first-of-type {
       margin-top: 0;
@@ -139,7 +137,7 @@
       padding-left: 1.4rem;
     }
     li {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
     }
     strong {
       color: #fff;
@@ -171,26 +169,81 @@
     <header>
       <img src="store_assets/google_play_icon_512x512.png" alt="Tidekeep App Icon" class="app-icon" id="appIcon">
       <h1>Tidekeep: Citadel of the Realm</h1>
-      <div class="subtitle">Offizielle Datenschutzerklärung &bull; Official Privacy Policy</div>
+      <div class="subtitle">Official Privacy Policy &bull; Folks Studios</div>
       <div class="lang-switch">
-        <button class="lang-btn active" id="btn-de" onclick="setLang('de')">🇩🇪 Deutsch</button>
-        <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English (Default)</button>
+        <button class="lang-btn" id="btn-de" onclick="setLang('de')">🇩🇪 Deutsch</button>
       </div>
     </header>
 
     <main class="card">
       <div class="badge-bar">
-        <span class="badge">🛡️ Zero-Tracking-Garantie</span>
-        <span class="badge">📶 100 % Offline spielbar</span>
-        <span class="badge">🚫 Keine Werbe-Netzwerke</span>
-        <span class="badge">🔒 DSGVO & COPPA konform</span>
+        <span class="badge">🛡️ Zero Tracking Guarantee</span>
+        <span class="badge">📶 100% Offline Playable</span>
+        <span class="badge">🚫 Zero Third-Party Ads</span>
+        <span class="badge">🔒 GDPR & COPPA Compliant</span>
       </div>
 
-      <!-- DEUTSCHE VERSION -->
-      <section id="content-de">
+      <!-- PRIMARY: ENGLISH (DEFAULT) -->
+      <section id="content-en">
+        <h2>1. Core Commitment: Respecting Your Privacy</h2>
+        <p>
+          At <strong>Folks Studios</strong>, player privacy and ethical game design are our highest priorities. 
+          <em>Tidekeep: Citadel of the Realm</em> is designed and built from the ground up on the principle of 
+          <strong>Zero-Tracking and complete data minimization</strong>.
+        </p>
+
+        <h2>2. Data Collection Policy</h2>
+        <p><strong>In short: We do not collect, process, sell, or transmit any personal data.</strong></p>
+        <ul>
+          <li><strong>No User Accounts:</strong> No sign-up, registration, email address, password, or profile creation is ever required.</li>
+          <li><strong>No Third-Party Advertising:</strong> The game contains zero advertising SDKs (no Google AdMob, Unity Ads, IronSource, AppLovin, etc.). There are no banner ads, no popups, and no rewarded video tracking.</li>
+          <li><strong>No Tracking Identifiers:</strong> We do not access, store, or transmit the Google Advertising ID (GAID), Apple IDFA, IMEI, or any persistent hardware serial numbers.</li>
+          <li><strong>Zero Telemetry Servers:</strong> Your gameplay sessions, builds, castle designs, and playtimes remain 100% local on your device.</li>
+        </ul>
+
+        <h2>3. Local Device Storage</h2>
+        <p>
+          All data required for the game (including fortress savegames, campaign progression, collected stars, and 16-character blueprint codes) is stored 
+          <strong>strictly within the private sandbox on your local device</strong>. 
+          Uninstalling the application automatically removes this local data per standard operating system behavior.
+        </p>
+
+        <h2>4. In-App Purchases (Google Play Billing)</h2>
+        <p>
+          <em>Tidekeep</em> offers optional in-app purchases (such as the one-time "Royal Standard" full campaign unlock and cosmetic masonry variations).
+        </p>
+        <ul>
+          <li>All financial transactions are handled <strong>securely and exclusively by Google Play (Google LLC)</strong> via TLS-encrypted protocols.</li>
+          <li>We as developers never receive, process, or store your payment card numbers, banking details, or billing addresses.</li>
+          <li>A cryptographically signed local receipt token is stored on your device solely to ensure your purchased content remains accessible offline.</li>
+        </ul>
+
+        <h2>5. Children's Privacy (COPPA & GDPR Compliance)</h2>
+        <p>
+          Because <em>Tidekeep: Citadel of the Realm</em> collects no personal data whatsoever, it is fully compliant with the <strong>Children's Online Privacy Protection Act (COPPA)</strong> in the United States and the European <strong>General Data Protection Regulation (GDPR)</strong>. The game is completely safe for players of all ages.
+        </p>
+
+        <h2>6. Controller Information & Contact</h2>
+        <p>
+          If you have any questions regarding this Privacy Policy or your game data, please contact:
+        </p>
+        <p>
+          <strong>Folks Studios &ndash; Support Team</strong><br>
+          Email: <a href="mailto:support@folksstudios.com">support@folksstudios.com</a><br>
+          Website: <a href="https://folksstudios.github.io/tidekeep/">https://folksstudios.github.io/tidekeep/</a><br>
+          GitHub: <a href="https://github.com/FolksStudios" target="_blank" rel="noopener">github.com/FolksStudios</a>
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem;">
+          Effective Date: October 27, 2026 (Version 1.0.0 Sovereign Edition)
+        </p>
+      </section>
+
+      <!-- SECONDARY: DEUTSCH -->
+      <section id="content-de" class="hidden">
         <h2>1. Grundsatz: Höchster Schutz Ihrer Privatsphäre</h2>
         <p>
-          Für das Entwicklerteam von <strong>VibeBuild AI</strong> steht der respektvolle und sichere Umgang mit Spielerdaten an oberster Stelle. 
+          Für das Entwicklerteam von <strong>Folks Studios</strong> steht der respektvolle und sichere Umgang mit Spielerdaten an oberster Stelle. 
           <em>Tidekeep: Citadel of the Realm</em> wurde nach dem Prinzip der <strong>vollständigen Datenvermeidung (Data Minimization & Zero-Tracking)</strong> entwickelt.
         </p>
 
@@ -230,75 +283,21 @@
           Bei Fragen zu dieser Datenschutzerklärung oder technischen Anliegen erreichen Sie uns direkt unter:
         </p>
         <p>
-          <strong>VibeBuild AI &ndash; Support-Team</strong><br>
-          E-Mail: <a href="mailto:support@vibebuild.ai">support@vibebuild.ai</a><br>
-          Web: <a href="https://vibebuild-ai.github.io/tidekeep/">https://vibebuild-ai.github.io/tidekeep/</a><br>
-          GitHub: <a href="https://github.com/VibeBuild-ai/tidekeep" target="_blank" rel="noopener">VibeBuild-ai/tidekeep</a>
+          <strong>Folks Studios &ndash; Support-Team</strong><br>
+          E-Mail: <a href="mailto:support@folksstudios.com">support@folksstudios.com</a><br>
+          Web: <a href="https://folksstudios.github.io/tidekeep/">https://folksstudios.github.io/tidekeep/</a><br>
+          GitHub: <a href="https://github.com/FolksStudios" target="_blank" rel="noopener">github.com/FolksStudios</a>
         </p>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem;">
           Stand dieser Datenschutzerklärung: 27. Oktober 2026 (Version 1.0.0 Sovereign Edition)
         </p>
       </section>
-
-      <!-- ENGLISCHE VERSION -->
-      <section id="content-en" class="hidden">
-        <h2>1. Core Commitment: Respecting Your Privacy</h2>
-        <p>
-          At <strong>VibeBuild AI</strong>, player privacy and ethical game design are our highest priorities. 
-          <em>Tidekeep: Citadel of the Realm</em> is built from the ground up on the principle of <strong>Zero-Tracking and complete data minimization</strong>.
-        </p>
-
-        <h2>2. Data Collection Policy</h2>
-        <p><strong>In short: We do not collect, process, or sell any personal data.</strong></p>
-        <ul>
-          <li><strong>No User Accounts:</strong> No sign-up, email address, password, or profile registration is ever required.</li>
-          <li><strong>No Third-Party Advertising:</strong> The game contains zero ad networks (no Google AdMob, Unity Ads, IronSource, etc.). There are no banner ads or forced video popups.</li>
-          <li><strong>No Tracking Identifiers:</strong> We do not access or transmit the Google Advertising ID (GAID), Apple IDFA, or persistent hardware identifiers.</li>
-          <li><strong>Zero Telemetry Servers:</strong> Your gameplay sessions, builds, and statistics remain 100% on your device.</li>
-        </ul>
-
-        <h2>3. Local Device Storage</h2>
-        <p>
-          All gameplay data—including fortress savegames, campaign progression, collected stars, and blueprint share codes—is stored 
-          <strong>strictly within the private sandbox on your local device</strong>. 
-          Uninstalling the application automatically removes this local data per standard operating system behavior.
-        </p>
-
-        <h2>4. In-App Purchases (Google Play Billing)</h2>
-        <p>
-          <em>Tidekeep</em> offers optional in-app purchases (such as the one-time "Royal Standard" full campaign unlock and cosmetic masonry skins).
-        </p>
-        <ul>
-          <li>All payment processing is handled <strong>securely and exclusively by Google Play (Google LLC)</strong> via TLS-encrypted protocols.</li>
-          <li>We never receive, process, or store your payment card numbers, banking information, or physical billing addresses.</li>
-          <li>A cryptographically signed local receipt token is stored on your device to ensure your purchases remain unlocked offline.</li>
-        </ul>
-
-        <h2>5. Children's Privacy (COPPA & GDPR Compliance)</h2>
-        <p>
-          Because <em>Tidekeep: Citadel of the Realm</em> collects no personal data whatsoever, it is fully compliant with the <strong>Children's Online Privacy Protection Act (COPPA)</strong> and the European <strong>General Data Protection Regulation (GDPR)</strong>. It is completely safe for players of all ages.
-        </p>
-
-        <h2>6. Contact & Controller Information</h2>
-        <p>
-          If you have questions regarding this Privacy Policy, please reach out to our team at:
-        </p>
-        <p>
-          <strong>VibeBuild AI Support</strong><br>
-          Email: <a href="mailto:support@vibebuild.ai">support@vibebuild.ai</a><br>
-          Web: <a href="https://vibebuild-ai.github.io/tidekeep/">https://vibebuild-ai.github.io/tidekeep/</a><br>
-          Repository: <a href="https://github.com/VibeBuild-ai/tidekeep" target="_blank" rel="noopener">VibeBuild-ai/tidekeep</a>
-        </p>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem;">
-          Effective Date: October 27, 2026 (Version 1.0.0 Sovereign Edition)
-        </p>
-      </section>
     </main>
 
     <footer>
-      &copy; 2026 VibeBuild AI. All rights reserved. &bull; 
+      &copy; 2026 Folks Studios. All rights reserved. &bull; 
       <a href="index.html">Tidekeep Home</a> &bull; 
-      <a href="https://github.com/VibeBuild-ai/tidekeep" target="_blank" rel="noopener">GitHub Project</a>
+      <a href="https://github.com/FolksStudios/tidekeep" target="_blank" rel="noopener">GitHub Project</a>
     </footer>
   </div>
 
