@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tidekeep: Citadel of the Realm – Tactile Castle Simulation</title>
+  <meta name="description" content="Baue Trutzburgen Stein für Stein, meistere Statik & siege über Belagerungswellen. Taktile 3D-Burgbau- und Belagerungssimulation mit Jolt Physics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #080b11;
+      --bg-surface: #0f1420;
+      --card-bg: rgba(22, 28, 42, 0.75);
+      --gold-primary: #d4af37;
+      --gold-light: #f5e7a9;
+      --gold-dark: #997819;
+      --cyan-accent: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(212, 175, 55, 0.25);
+      --border-glow: rgba(212, 175, 55, 0.45);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, #1e293b 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER / NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--gold-light);
+    }
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--gold-primary);
+    }
+    .btn-nav {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #090c12 !important;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 4rem 0 3rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+    h1 span {
+      background: linear-gradient(135deg, #fff 0%, var(--gold-light) 60%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-p {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .hero-banner {
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+      margin-bottom: 4rem;
+    }
+    .hero-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* FEATURES GRID */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--gold-light);
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-glow);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+    }
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 0.75rem;
+    }
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      background: #000;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      border-color: var(--gold-primary);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .gallery-caption {
+      padding: 1rem 1.25rem;
+      background: rgba(15, 20, 32, 0.95);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .gallery-caption h4 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .gallery-caption p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ZERO TRACKING BOX */
+    .privacy-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 20, 31, 0.9));
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .privacy-banner h2 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-primary);
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    .privacy-banner p {
+      max-width: 680px;
+      margin: 0 auto 1.75rem;
+      color: var(--text-muted);
+    }
+    .btn-privacy {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold-light);
+      border: 1px solid var(--gold-primary);
+      padding: 10px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-privacy:hover {
+      background: var(--gold-primary);
+      color: #090c12;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    footer a {
+      color: var(--gold-primary);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="index.html" class="brand">
+        <img src="store_assets/google_play_icon_512x512.png" alt="Tidekeep Icon">
+        <span class="brand-title">Tidekeep</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#gallery">Galerie</a>
+        <a href="privacy.html">Datenschutz</a>
+        <a href="https://github.com/VibeBuild-ai/tidekeep" target="_blank" rel="noopener" class="btn-nav">GitHub</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-badge">⚜️ Sovereign Edition v1.0.0 &bull; Google Play Ready</div>
+      <h1>Erhebe deine Trutzburg über den Fluten.<br><span>Tidekeep: Citadel of the Realm</span></h1>
+      <p class="hero-p">
+        Die taktile, physikbasierte Burgbau- und Belagerungssimulation. Verbindet 0,5m-Rasterbauen mit einem deterministischen Jolt-3D-Statikmodell, dynamischer Grabenhydraulik und lebendiger Siedlerwirtschaft.
+      </p>
+
+      <div class="hero-banner">
+        <img src="store_assets/google_play_feature_graphic_1024x500.png" alt="Tidekeep Banner">
+      </div>
+    </header>
+
+    <section id="features">
+      <h2 class="section-title">Meisterhafte Architektur</h2>
+      <p class="section-sub">Entwickelt für Strategen, Baumeister und Ästheten gleichermaßen.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-icon">🏰</span>
+          <h3>Taktiles Bauen & Statik</h3>
+          <p>Jeder Steinblock trägt Last. Ein unbestechliches Tragwerksmodell berechnet die Stabilität in Echtzeit. Bricht das Fundament, stürzen Türme in physikalischen Jolt-3D-Trümmern ein.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🌊</span>
+          <h3>Wassergraben & Tore</h3>
+          <p>Grabe Kanäle zur Flussaue und flute deinen Graben mit reißendem Flusswasser. Verriegle die schwere Kettenzugbrücke per 1-Tap für +2000 Schild-HP.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">⚔️</span>
+          <h3>Belagerungs-Schlachten</h3>
+          <p>Verteidige deine Zinnen gegen gepanzerte Rammböcke, Bliden und grabende Sappeure. Nutze das optische Telegraphing, um bedrohte Mauern rechtzeitig zu verstärken.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">👥</span>
+          <h3>Lebendige Wirtschaft</h3>
+          <p>Steinmetze schlagen Quader im Steinbruch, Bäcker liefern Mehlbrotsäcke in die Kornkammer und Wachen patrouillieren auf den Wehrgängen. Siedler eilen mit Eimerketten zur Brandbekämpfung.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🕊️</span>
+          <h3>Freie Zen-Sandbox</h3>
+          <p>Genieße unbegrenzte Steine, null Belagerungsdruck und volle Kontrolle über Sonnenstand, Wetter und Schnee. Erschaffe atemberaubende Wallpaper mit dem Tilt-Shift-Fotomodus.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📜</span>
+          <h3>16-Zeichen-Sharing</h3>
+          <p>Teile deine Festungsbauten weltweit über kompakte 16-Zeichen-Codes oder Pergament-Postkarten mit Freunden – ganz ohne Server-Account oder Zwangs-Login.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2 class="section-title">Eindrücke aus dem Reich</h2>
+      <p class="section-sub">Offizielle In-Game Impressionen aus den 5 Provinzen des Flusstals.</p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/01_hero_diorama_tidekeep.jpg" alt="Diorama Zitadelle im Morgengrauen">
+          <div class="gallery-caption">
+            <h4>Die Zitadelle im Morgengrauen</h4>
+            <p>Panorama-Diorama über den Klippen des Flusstals.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/02_tactile_masonry_statics.jpg" alt="Taktiles Bauen & Statik">
+          <div class="gallery-caption">
+            <h4>Taktiles Bauen & Statik</h4>
+            <p>0,5m-Gitterquantisierung mit physikalischen Last- und Rissvektoren.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/03_siege_destruction_physics.jpg" alt="Erbarmungslose Belagerungen">
+          <div class="gallery-caption">
+            <h4>Belagerung & Zerstörungsphysik</h4>
+            <p>Rammböcke, Bliden-Einschläge und einstürzende Mauertürme.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/04_moat_hydraulics_gatehouse.jpg" alt="Wassergraben-Hydraulik">
+          <div class="gallery-caption">
+            <h4>Wassergraben & Kinematische Tore</h4>
+            <p>Flussflutung, Wehre und rasselnde Kettenzugbrücken.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/05_living_castle_colony.jpg" alt="Lebendiges Schloss">
+          <div class="gallery-caption">
+            <h4>Lebendiges Schloss & Wuselfaktor</h4>
+            <p>Autonome Siedlerberufe: Schmiede, Bäckerei und Schildwachen.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="store_assets/screenshots/06_campaign_atlas_epilogue.jpg" alt="Reichsatlas & 5 Provinzen">
+          <div class="gallery-caption">
+            <h4>Reichsatlas & 5 Provinzen</h4>
+            <p>Vom Felssporn bis zum kaiserlichen Königspass der Krone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="privacy-banner">
+      <h2>🛡️ Faires Modell A+ & Zero-Tracking-Garantie</h2>
+      <p>
+        Tidekeep respektiert deine Zeit und deine Daten: Keine erzwungenen Werbeunterbrechungen, keine Datenerfassung durch Drittanbieter-Tracker und 100 % offline spielbar.
+      </p>
+      <a href="privacy.html" class="btn-privacy">Offizielle Datenschutzerklärung lesen ➔</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 VibeBuild AI. Tidekeep: Citadel of the Realm. Alle Rechte vorbehalten.</p>
+      <p style="margin-top: 8px;">
+        <a href="privacy.html">Datenschutzerklärung</a> &bull; 
+        <a href="https://github.com/VibeBuild-ai/tidekeep" target="_blank" rel="noopener">GitHub Repository</a> &bull; 
+        <a href="mailto:support@vibebuild.ai">Support & Kontakt</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
